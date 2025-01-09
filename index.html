@@ -1,25 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NBA Player Performance Predictor</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>NBA Player Performance Predictor</h1>
-    <form id="player-form">
-        <label for="player-name">Player Name:</label>
-        <input type="text" id="player-name" placeholder="Enter player name" required>
-        <label for="points">Points:</label>
-        <input type="number" id="points" placeholder="Points scored" required>
-        <label for="rebounds">Rebounds:</label>
-        <input type="number" id="rebounds" placeholder="Rebounds" required>
-        <label for="assists">Assists:</label>
-        <input type="number" id="assists" placeholder="Assists" required>
-        <button type="submit">Predict</button>
-    </form>
-    <div id="prediction-result"></div>
-    <script src="script.js"></script>
-</body>
-</html>
+<div class="container">
+    <div class="sidebar">
+        <h2>Players</h2>
+        <ul id="player-list">
+            <!-- Dynamic Player List -->
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="player-stats">
+            <h2>Player Stats</h2>
+            <div id="stats-container">
+                <!-- Dynamic Stats -->
+            </div>
+        </div>
+        <div class="charts">
+            <h2>Performance Over Time</h2>
+            <canvas id="performance-chart"></canvas>
+        </div>
+    </div>
+</div>
