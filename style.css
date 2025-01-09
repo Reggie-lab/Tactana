@@ -1,20 +1,31 @@
 body {
     font-family: Arial, sans-serif;
-    display: flex;
     margin: 0;
     padding: 0;
+    background-color: #121212;
+    color: #fff;
+}
+
+header {
+    background: #1e1e1e;
+    padding: 10px;
+    text-align: center;
 }
 
 .container {
     display: flex;
-    width: 100%;
+    height: 100vh;
 }
 
 .sidebar {
-    width: 25%;
-    background-color: #1e1e2f;
-    color: #fff;
-    padding: 20px;
+    width: 20%;
+    background: #1e1e1e;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    margin-top: 0;
 }
 
 .sidebar ul {
@@ -25,13 +36,22 @@ body {
 .sidebar ul li {
     margin: 10px 0;
     cursor: pointer;
+    padding: 10px;
+    background: #333;
+    border-radius: 5px;
+}
+
+.sidebar ul li:hover {
+    background: #444;
 }
 
 .main-content {
-    width: 75%;
+    flex: 1;
     padding: 20px;
+    overflow-y: auto;
 }
 
-.charts {
-    margin-top: 20px;
+canvas {
+    max-width: 100%;
+    height: 400px;
 }
