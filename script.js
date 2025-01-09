@@ -1,15 +1,53 @@
-document.getElementById("player-form").addEventListener("submit", function (e) {
-    e.preventDefault();
+async function fetchPlayers() {
+    const response = await fetch("https://www.balldontlie.io/api/v1/players");
+    const data = await response.json();
+    const players = data.data;
 
-    const playerName = document.getElementById("player-name").value;
-    const points = parseFloat(document.getElementById("points").value);
-    const rebounds = parseFloat(document.getElementById("rebounds").value);
-    const assists = parseFloat(document.getElementById("assists").value);
+    const playerList = document.getElementById("player-list");
+    players.forEach(player => {
+        const li = document.createElement("li");
+        li.textContent = `${player.first_name} ${player.last_name}`;
+        li.addEventListener("click", () => showPlayerStats(player.id));
+        playerList.appendChild(li);
+    });
+}
 
-    const predictionResult = document.getElementById("prediction-result");
+async function showPlayerStats(playerId) {
+    const response = await fetch(`https://www.balldontlie.io/api/v1/stats?player_ids[]=${playerId}`);
+    const data = await response.json();
+    const stats = data.data[0];
 
-    // Example Prediction Logic (replace with your API call or algorithm)
-    const predictedPerformance = points * 1.1 + rebounds * 1.2 + assists * 1.3;
+    const statsContainer = document.getElementById("stats-container");
+    statsContainer.innerHTML = `
+        <p>Points: ${stats.pts}</p>
+        <p>Rebounds: ${stats.reb}</p>
+        <p>Assists: ${stats.ast}</p>
+    `;
 
-    predictionResult.innerHTML = `Predicted Performance for ${playerName}: ${predictedPerformance.toFixed(2)}`;
-});
+    // Example Chart Data
+    updateChart([10, 20, 30, 40], [15, 25, 35, 45]);
+}
+
+function updateChart(actual, potential) {
+    const ctx = document.getElementById("performance-chart").getContext("2d");
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Game 1', 'Game 2', 'Game 3', 'Game 4'],
+            datasets: [
+                {
+                    label: 'Actual Points',
+                    data: actual,
+                    borderColor: 'green',
+                },
+                {
+                    label: 'Potential Points',
+                    data: potential,
+                    borderColor: 'blue',
+                }
+            ]
+        }
+    });
+}
+
+fetchPlayers();
